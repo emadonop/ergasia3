@@ -1,0 +1,58 @@
+/* 
+    Document   : profilecss
+    Created on : Nov 3, 2012, 7:56:57 PM
+    Author     : manos
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+img { 
+   width:200px;
+   height:180px;
+ 
+
+   
+}
+
+.manos {
+    float: left;
+ 
+}
+
+/*
+.skewImage{
+      -moz-transform: skew(-111deg);
+      -webkit-transform: skew(-111deg);
+    }
+
+    
+    */
+    
+.rotate
+{
+transform:rotate(90deg);
+-moz-transform:rotate(90deg); /* Firefox */
+-webkit-transform:rotate(90deg); /* Safari and Chrome */
+}    
+    
+.rotate180
+{
+transform:rotate(180deg);
+-moz-transform:rotate(180deg); /* Firefox */
+-webkit-transform:rotate(180deg); /* Safari and Chrome */
+}
+
+
+.rotate270
+{
+transform:rotate(270deg);
+-moz-transform:rotate(270deg); /* Firefox */
+-webkit-transform:rotate(270deg); /* Safari and Chrome */
+}    
+    
+    
+.scale_class {
+  -moz-transform: scale(0.5);
+  -webkit-transform: scale(0.5);
+}

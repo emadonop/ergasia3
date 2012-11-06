@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <servlet>
+        <servlet-name>edit</servlet-name>
+        <servlet-class>edit</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>edit</servlet-name>
+        <url-pattern>/edit</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>loginflickr</servlet-name>
+        <servlet-class>loginflickr</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>loginflicrk</servlet-name>
+        <url-pattern>/loginflicrk</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>profile_page</servlet-name>
+        <servlet-class>profile_page</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>profile_page</servlet-name>
+        <url-pattern>/profile_page</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>project3</servlet-name>
+        <servlet-class>project3</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>project3</servlet-name>
+        <url-pattern>/project3</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>update</servlet-name>
+        <servlet-class>update</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>update</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>upload_photos</servlet-name>
+        <servlet-class>upload_photos</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>upload_photos</servlet-name>
+        <url-pattern>/upload_photos</url-pattern>
+    </servlet-mapping>
+    
+    
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
