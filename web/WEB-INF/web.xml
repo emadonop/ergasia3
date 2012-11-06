@@ -14,8 +14,8 @@
         <servlet-class>loginflickr</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>loginflicrk</servlet-name>
-        <url-pattern>/loginflicrk</url-pattern>
+        <servlet-name>loginflickr</servlet-name>
+        <url-pattern>/loginflickr</url-pattern>
     </servlet-mapping>
     
     
