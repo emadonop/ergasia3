@@ -43,7 +43,6 @@ import java.net.URLEncoder;
 
 @WebServlet(name = "update", urlPatterns = {"/update"})
 public class update extends HttpServlet {
-    Connection con;
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -74,31 +73,10 @@ public class update extends HttpServlet {
             
         }
         
-        profile_page.generate_page(username, con, out, this.getServletContext().getRealPath("/"));
+        profile_page.generate_page(username, out, this.getServletContext().getRealPath("/"));
         out.close();
     }
 
-     public void init(ServletConfig config) throws ServletException
-    {
-        super.init(config);
-        con = null;
-
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            String connectionUrl = "jdbc:mysql://localhost/myflickr?"
-                    + "user=root&password=123456";
-            con = DriverManager.getConnection(connectionUrl);
-
-            if (con != null) {
-                System.out.println("connected to mysql");
-            }
-        } catch (SQLException e) {
-            System.out.println("SQL Exception: " + e.toString());
-        } catch (ClassNotFoundException cE) {
-            System.out.println("Class Not Found Exception: " + cE.toString());
-        }
-    }
-    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP

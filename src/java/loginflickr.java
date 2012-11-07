@@ -13,8 +13,6 @@ import java.sql.*;
 @WebServlet(name = "loginflickr", urlPatterns = {"/loginflickr"})
 public class loginflickr extends HttpServlet {
 
-    static Connection con;
-
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -36,7 +34,22 @@ public class loginflickr extends HttpServlet {
         Statement stmt;
         ResultSet rs;
 
+Connection con = null;
 
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String connectionUrl = "jdbc:mysql://localhost/myflickr?"
+                    + "user=root&password=123456";
+            con = DriverManager.getConnection(connectionUrl);
+
+            if (con != null) {
+                System.out.println("connected to mysql");
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: " + e.toString());
+        } catch (ClassNotFoundException cE) {
+            System.out.println("Class Not Found Exception: " + cE.toString());
+        }
 
         try {
             stmt = con.createStatement();
@@ -109,23 +122,4 @@ public class loginflickr extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        con = null;
-
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            String connectionUrl = "jdbc:mysql://localhost/myflickr?"
-                    + "user=root&password=123456";
-            con = DriverManager.getConnection(connectionUrl);
-
-            if (con != null) {
-                System.out.println("connected to mysql");
-            }
-        } catch (SQLException e) {
-            System.out.println("SQL Exception: " + e.toString());
-        } catch (ClassNotFoundException cE) {
-            System.out.println("Class Not Found Exception: " + cE.toString());
-        }
-    }
 }

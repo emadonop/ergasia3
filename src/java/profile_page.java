@@ -34,7 +34,7 @@ import javax.xml.transform.dom.DOMSource;
 @WebServlet(name = "profile_page", urlPatterns = {"/profile_page"})
 public class profile_page extends HttpServlet {
 
-    public static void generate_page(String username, Connection con, PrintWriter out, String path) {
+    public static void generate_page(String username, PrintWriter out, String path) {
         out.println("<html>");
         out.println("<head>");
         out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
@@ -60,6 +60,23 @@ public class profile_page extends HttpServlet {
                 + "<input type=\"submit\" value=\"UPLOAD\">\n"
                 + "</div>\n"
                 + "</form>");
+        Connection con = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String connectionUrl = "jdbc:mysql://localhost/myflickr?"
+                    + "user=root&password=123456";
+            con = DriverManager.getConnection(connectionUrl);
+
+            if (con != null) {
+                System.out.println("connected to mysql");
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: " + e.toString());
+        } catch (ClassNotFoundException cE) {
+            System.out.println("Class Not Found Exception: " + cE.toString());
+        }
+
 
         try {
 
@@ -70,10 +87,10 @@ public class profile_page extends HttpServlet {
             while (rs.next()) {
 
                 out.println("<div class=\"manos\">");
-                                   out.println("<form action=\"edit\"  method=\"get\">"
-                            + "    <input type=\"submit\" name=\"Edit xml\">"
-                            + "    <input type=\"hidden\" name=\"photo\" value=\"" + rs.getString("photo_id") + "\">"
-                            + "</form>");
+                out.println("<form action=\"edit\"  method=\"get\">"
+                        + "    <input type=\"submit\" name=\"Edit xml\">"
+                        + "    <input type=\"hidden\" name=\"photo\" value=\"" + rs.getString("photo_id") + "\">"
+                        + "</form>");
                 try {
                     DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
                     DocumentBuilder db = dbf.newDocumentBuilder();
@@ -90,19 +107,14 @@ public class profile_page extends HttpServlet {
 
                         if (transform.equals("scale_class")) {
                             out.println("<img class=\"scale_class\" src=\"project_images/" + rs.getString("photo_id") + "\">");
-                        } 
-                        
-                        else if (transform.equals("rotate")) {
+                        } else if (transform.equals("rotate")) {
                             out.println("<img class=\"rotate\" src=\"project_images/" + rs.getString("photo_id") + "\">");
-                        }
-                        
-                         else if (transform.equals("rotate180")) {
+                        } else if (transform.equals("rotate180")) {
                             out.println("<img class=\"rotate180\" src=\"project_images/" + rs.getString("photo_id") + "\">");
-                         }
-                          else if (transform.equals("rotate270")) {
+                        } else if (transform.equals("rotate270")) {
                             out.println("<img class=\"rotate270\" src=\"project_images/" + rs.getString("photo_id") + "\">");
-                      
-                          }else {
+
+                        } else {
                             out.println("<img src=\"project_images/" + rs.getString("photo_id") + "\">");
                         }
 
@@ -141,23 +153,8 @@ public class profile_page extends HttpServlet {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("name");
 
-        Connection con;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            String connectionUrl = "jdbc:mysql://localhost/myflickr?"
-                    + "user=root&password=123456";
-            con = DriverManager.getConnection(connectionUrl);
+        generate_page(username, out, this.getServletContext().getRealPath("/"));
 
-            if (con != null) {
-                System.out.println("connected to mysql");
-                generate_page(username, con, out, this.getServletContext().getRealPath("/"));
-            } else {
-            }
-        } catch (SQLException e) {
-            System.out.println("SQL Exception: " + e.toString());
-        } catch (ClassNotFoundException cE) {
-            System.out.println("Class Not Found Exception: " + cE.toString());
-        }
 
     }
 

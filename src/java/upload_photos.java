@@ -47,8 +47,6 @@ import javax.xml.transform.dom.DOMSource;
 @WebServlet(name = "upload_photos", urlPatterns = {"/upload_photos"})
 public class upload_photos extends HttpServlet {
 
-    Connection con;
-
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -144,7 +142,7 @@ public class upload_photos extends HttpServlet {
                         }
                         int IndexOf = itemName.indexOf(".");
                         if (IndexOf == -1) {
-                            profile_page.generate_page(name, con, out, this.getServletContext().getRealPath("/"));
+                            profile_page.generate_page(name, out, this.getServletContext().getRealPath("/"));
                             return;
                         }
                         String domainName = itemName.substring(IndexOf);
@@ -184,6 +182,7 @@ public class upload_photos extends HttpServlet {
 
                         } catch (Exception e) {
                         }
+                        Connection con = null;
                         try {
                             Class.forName("com.mysql.jdbc.Driver");
                             String connectionUrl = "jdbc:mysql://localhost/myflickr?"
@@ -200,7 +199,7 @@ public class upload_photos extends HttpServlet {
                         }
                         Statement stmt = con.createStatement();
                         stmt.execute("insert into user_and_photo_id VALUES('" + name + "','" + finalimage + "')");
-                        profile_page.generate_page(name, con, out, this.getServletContext().getRealPath("/"));
+                        profile_page.generate_page(name, out, this.getServletContext().getRealPath("/"));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
