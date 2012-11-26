@@ -10,9 +10,14 @@ import javax.servlet.http.*;
 
 import java.sql.*;
 
-@WebServlet(name = "loginflickr", urlPatterns = {"/loginflickr"})
+@WebServlet(name = "loginflickr", urlPatterns = {"/loginflickr"}, loadOnStartup=0)
 public class loginflickr extends HttpServlet {
-
+    static LoginListener loginListener;
+    
+    public static void SetListener(LoginListener listener ) {
+        loginListener = listener;
+    }
+    
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -62,9 +67,12 @@ Connection con = null;
                     session.setAttribute("name", username);
                     out.println("<h1>Username and password accepted</h1>");
                     out.println("<a href=\"profile_page\">Welcome</a>");
-
+                    
+                    
                     stmt.close();
                     rs.close();
+                    
+                    loginListener.Login(username);
                     return;
 
                 }

@@ -59,6 +59,7 @@ public class profile_page extends HttpServlet {
                 + "<div>\n"
                 + "<input type=\"submit\" value=\"UPLOAD\">\n"
                 + "</div>\n"
+           //    + "<input type=\"submit\" value=\"LOG OUT\">\n" //
                 + "</form>");
         Connection con = null;
 

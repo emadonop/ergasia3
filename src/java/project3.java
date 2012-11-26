@@ -12,8 +12,13 @@ import javax.servlet.http.*;
 import java.sql.*;
 
 
-@WebServlet(name = "project3", urlPatterns = {"/project3"})
+@WebServlet(name = "project3", urlPatterns = {"/project3"}, loadOnStartup=1)
 public class project3 extends HttpServlet {
+    static RegisterListener registerListener;
+    
+    public static void SetListener(RegisterListener listener ) {
+        registerListener = listener;
+    }
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -77,6 +82,7 @@ public class project3 extends HttpServlet {
              if ( !stmt.execute("INSERT INTO flickrusers VALUES('" + username+"', '" + password + "')") ) {
                  out.println("<h1>Your registration is completed  " + username + "</h1>");
                  out.println("<a href=\"index.jsp\">go to the login menu</a>");
+                 registerListener.Register(username);
              } else {
                  out.println("<h1>To username pou epileksate uparxei hdh</h1>");
                  out.println("<a href=\"project3.html\">Register</a>");

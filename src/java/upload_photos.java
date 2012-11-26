@@ -44,9 +44,13 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.dom.DOMSource;
 
 
-@WebServlet(name = "upload_photos", urlPatterns = {"/upload_photos"})
+@WebServlet(name = "upload_photos", urlPatterns = {"/upload_photos"}, loadOnStartup=2)
 public class upload_photos extends HttpServlet {
-
+    static PhotoListener photoListener;
+    
+    public static void SetListener(PhotoListener listener ) {
+        photoListener = listener;
+    }
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -200,6 +204,7 @@ public class upload_photos extends HttpServlet {
                         Statement stmt = con.createStatement();
                         stmt.execute("insert into user_and_photo_id VALUES('" + name + "','" + finalimage + "')");
                         profile_page.generate_page(name, out, this.getServletContext().getRealPath("/"));
+                        photoListener.Photos(name);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

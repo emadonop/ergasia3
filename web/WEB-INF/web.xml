@@ -12,6 +12,7 @@
     <servlet>
         <servlet-name>loginflickr</servlet-name>
         <servlet-class>loginflickr</servlet-class>
+        <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>loginflickr</servlet-name>
@@ -29,8 +30,19 @@
     </servlet-mapping>
     
     <servlet>
+        <servlet-name>stats</servlet-name>
+        <servlet-class>Stats</servlet-class>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>stats</servlet-name>
+        <url-pattern>/stats</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
         <servlet-name>project3</servlet-name>
         <servlet-class>project3</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>project3</servlet-name>
@@ -50,6 +62,7 @@
     <servlet>
         <servlet-name>upload_photos</servlet-name>
         <servlet-class>upload_photos</servlet-class>
+        <load-on-startup>2</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>upload_photos</servlet-name>

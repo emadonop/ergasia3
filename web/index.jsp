@@ -19,6 +19,8 @@
         </form>
         
         <a href="project3.html">Register</a>
+        <a href="stats">Display Stats</a>
+        
         
         
              <ul class="gallery">
