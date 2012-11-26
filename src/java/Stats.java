@@ -4,6 +4,7 @@
  */
 
 import java.util.*;
+import java.util.Map.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -39,10 +40,11 @@ public class Stats extends HttpServlet implements LoginListener, RegisterListene
         Integer number = (Integer) UsersPhotos.get(user);
         
         if ( number == null ) {
-            UsersPhotos.put(user, 1);
+            UsersPhotos.put(user, new Integer(1));
         } else {
             number++;
             UsersPhotos.put(user, number);
+            System.out.println(user + " : " + UsersPhotos.get(user));
         }
     }
     /**
@@ -86,9 +88,21 @@ public class Stats extends HttpServlet implements LoginListener, RegisterListene
                 + ""
                 + "</script>\n");
             
+            Integer photos = 0;
+            
+            Iterator iter = UsersPhotos.entrySet().iterator();
+            
+            while ( iter.hasNext() ) {
+                Map.Entry<String, Integer> e = (Map.Entry) iter.next();
+                
+                if ( e.getValue() != null )
+                    photos += (Integer)e.getValue();
+                
+            }
+            
             out.println("Users Online: " + UsersLog.size() + "<br>");
             out.println("Users Registered: " + UsersReg.size()  + "<br>");
-            out.println("Photos Uploaded:" + UsersPhotos.size()  + "<br>");
+            out.println("Photos Uploaded:" + photos  + "<br>");
             
             out.println("</body>");
             out.println("</html>");
